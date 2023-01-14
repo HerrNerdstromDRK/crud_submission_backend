@@ -1,0 +1,25 @@
+GET http://localhost:4000/blogposts
+
+###
+GET http://localhost:4000/blogposts/63c32f2200d8d46fa6eddb1d
+
+###
+POST http://localhost:4000/blogposts
+Content-Type: application/json
+
+{
+    "author": "Unknown",
+    "title": "Test Post Title 3",
+    "content": "Test Post Content 3"
+}
+
+###
+DELETE http://localhost:4000/blogposts/63c32f2a00d8d46fa6eddb1f
+
+###
+PATCH http://localhost:4000/blogposts/63c32f4f00d8d46fa6eddb29
+Content-Type: application/json
+
+{
+    "title": "New Title 3 - 1"
+}
