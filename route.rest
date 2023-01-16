@@ -1,7 +1,7 @@
 GET http://localhost:4000/blogposts
 
 ###
-GET http://localhost:4000/blogposts/63c32f2200d8d46fa6eddb1d
+GET http://localhost:4000/blogposts/63c4628053198321dc6d922d
 
 ###
 POST http://localhost:4000/blogposts
@@ -23,3 +23,31 @@ Content-Type: application/json
 {
     "title": "New Title 3 - 1"
 }
+
+###
+GET http://localhost:4000/blogusers
+
+###
+GET http://localhost:4000/blogusers/63c478d35af1b6419558aead
+
+###
+POST http://localhost:4000/blogusers
+Content-Type: application/json
+
+{
+    "firstName": "Dan4",
+    "lastName": "Karrels",
+    "userName": "dannys4",
+    "hashedPassword": "Abc12345!!"
+}
+
+###
+PATCH http://localhost:4000/blogusers/63c478d35af1b6419558aead
+Content-Type: application/json
+
+{
+    "hashedPassword": "Abc12345678!!"
+}
+
+###
+DELETE http://localhost:4000/blogusers/63c49e2bfbf03c47514c651e

@@ -1,6 +1,9 @@
+/**
+ * Handle all routes that begin with /blogposts
+ */
 const express = require("express");
 const router = express.Router();
-const BlogPost = require("../models/BlogPost");
+const BlogPost = require("../models/BlogPostModel");
 
 // Get all
 router.get("/", async (req, res) => {
