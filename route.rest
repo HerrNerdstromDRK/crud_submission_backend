@@ -28,17 +28,17 @@ Content-Type: application/json
 GET http://localhost:4000/blogusers
 
 ###
-GET http://localhost:4000/blogusers/63c478d35af1b6419558aead
+GET http://localhost:4000/blogusers/63c5a8eabd264d787a74d31c
 
 ###
-POST http://localhost:4000/blogusers
+POST http://localhost:4000/blogusers/register
 Content-Type: application/json
 
 {
-    "firstName": "Dan4",
+    "firstName": "Danss4",
     "lastName": "Karrels",
-    "userName": "dannys4",
-    "hashedPassword": "Abc12345!!"
+    "userName": "danny",
+    "pwd": "Abc12345!!"
 }
 
 ###
@@ -50,4 +50,19 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:4000/blogusers/63c49e2bfbf03c47514c651e
+DELETE http://localhost:4000/blogusers/63c5a6c86d00980a9a26c463
+
+###
+POST http://localhost:4000/blogusers/authenticate
+Content-Type: application/json
+
+{
+    "userName": "danny",
+    "pwd": "Abc12345!!"
+}
+
+###
+GET http://localhost:4000/blogusers/refresh
+
+###
+GET http://localhost:4000/blogusers/logout
