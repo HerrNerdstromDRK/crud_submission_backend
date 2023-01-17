@@ -41,6 +41,7 @@ router.post("/", async (req, res) => {
 
 // Update only updated data
 router.patch("/:id", getBlogPost, async (req, res) => {
+  console.log("updatePost> res.blogPost: " + JSON.stringify(res.blogPost));
   if (req.body.author != null) {
     res.blogPost.author = req.body.author;
   }

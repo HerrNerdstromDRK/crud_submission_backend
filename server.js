@@ -53,3 +53,4 @@ app.use("/blogusers", blogUsersRouter);
 // TODO: use dotenv
 // Open the middleware server on the given port
 app.listen(PORT, () => console.log("Server started on port " + PORT));
+// TODO: Test with Chrome to verify security restrictions still work

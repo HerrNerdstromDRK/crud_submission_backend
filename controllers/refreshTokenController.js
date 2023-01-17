@@ -37,7 +37,7 @@ const handleRefreshToken = async (req, res) => {
   );
 
   // Retrieve the existing blog user, if it exists.
-  const existingBlogUser = await BlogUser.findOne({ refreshToken });
+  const existingBlogUser = await BlogUser.findOne({ refreshToken }).exec();
   console.log(
     "refreshTokenController.handleRefreshToken> existingBlogUser: " +
       JSON.stringify(existingBlogUser)

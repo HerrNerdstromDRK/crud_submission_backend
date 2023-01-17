@@ -21,9 +21,8 @@ const BlogUser = require("../models/BlogUserModel");
  * -- Must be allowed to expire or logout
  */
 const handleLogout = async (req, res) => {
-  // TODO: On client, also delete accessToken
-
   //  console.log("handleLogout");
+
   // Retrieve the cookies and check for a JWT
   const cookies = req.cookies;
   if (!cookies?.jwt) {
@@ -32,13 +31,13 @@ const handleLogout = async (req, res) => {
   }
   // Post condition: Found JWT
   const refreshToken = cookies.jwt;
-  console.log("handleLogout> refreshToken: " + refreshToken);
+  //  console.log("handleLogout> refreshToken: " + refreshToken);
 
   // Retrieve the existing blog user, if it exists.
-  const existingBlogUser = await BlogUser.findOne({ refreshToken });
-  console.log(
-    "handleLogout> existingBlogUser: " + JSON.stringify(existingBlogUser)
-  );
+  const existingBlogUser = await BlogUser.findOne({ refreshToken }).exec();
+  //  console.log(
+  //    "handleLogout> existingBlogUser: " + JSON.stringify(existingBlogUser)
+  //  );
   if (!existingBlogUser) {
     // Unable to locate the user for a login attempt
     // Erase the cookie identified as "jwt"
@@ -52,7 +51,11 @@ const handleLogout = async (req, res) => {
 
   // Delete refresh token from db
   existingBlogUser.refreshToken = "";
-  await existingBlogUser.save();
+  const result = await existingBlogUser.save();
+  //  console.log(
+  //    "logoutController.handleLogout> Removed refresh token; result: " +
+  //      JSON.stringify(result)
+  //  );
 
   // Clear the cookie
   res.clearCookie("jwt", { httpOnly: true });

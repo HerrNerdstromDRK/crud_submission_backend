@@ -14,7 +14,9 @@ const getBlogUserByRefreshToken = async (req, res) => {
 
   let blogUser = null;
   try {
-    blogUser = await BlogUser.findOne({ userName: req.body.refreshToken });
+    blogUser = await BlogUser.findOne({
+      userName: req.body.refreshToken,
+    }).exec();
     console.log("getBlogUserByRefreshToken> blogUser: " + blogUser);
   } catch (err) {
     console.log("getBlogUserByRefreshToken> error in findOne()");

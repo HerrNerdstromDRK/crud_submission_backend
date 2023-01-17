@@ -31,8 +31,8 @@ const handleRegister = async (req, res) => {
     // hash with 10 salt rounds
     const hashedPassword = await bcrypt.hash(req.body.pwd, 10);
 
-    // Create a new blogUser to add to the database
-    const blogUser = new BlogUser({
+    // Create a new blogUser and add to the database
+    const newBlogUser = await BlogUser.create({
       // _id is auto-filled by mongoDB
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -40,15 +40,12 @@ const handleRegister = async (req, res) => {
       hashedPassword: hashedPassword,
     });
     console.log(
-      "registerController.handleRegister> Creating new user: " +
-        JSON.stringify(blogUser)
+      "registerController.handleRegister> Created and saved new user: " +
+        JSON.stringify(newBlogUser)
     );
 
-    // Save the new user into the database
-    const newBlogUser = blogUser.save();
-
     // 201: Successfully created object
-    res.status(201).send(blogUser);
+    res.status(201).send(newBlogUser);
   } catch (err) {
     console.log(
       "registerController.handleRegister> Caught error: " + err.message
