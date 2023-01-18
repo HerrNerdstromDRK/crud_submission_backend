@@ -1,12 +1,26 @@
 /**
  * Handle all routes that begin with /blogposts
  */
+const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const BlogPost = require("../models/BlogPostModel");
 
 // Get all
 router.get("/", async (req, res) => {
+  //  console.log(req);
+  try {
+    const blogPosts = await BlogPost.find();
+    res.json(blogPosts);
+  } catch (err) {
+    // 500 is server error code
+    res.status(500).json({ message: err.message });
+  }
+});
+
+router.get("/itemsbyuser/:userName", async (req, res) => {
+  const whichUserName = req.params.userName;
+  console.log("get(myitems)> ");
   try {
     const blogPosts = await BlogPost.find();
     res.json(blogPosts);
@@ -64,10 +78,13 @@ router.patch("/:id", getBlogPost, async (req, res) => {
 
 // Delete one
 router.delete("/:id", getBlogPost, async (req, res) => {
+  //  console.log("delete> req.params.id: " + req.params.id);
   try {
-    await res.blogPost.remove();
-    res.json({ message: "Deleted blog post" });
+    await res.blogPost.delete();
+    res.status(200).json({ message: "Deleted blog post" });
   } catch (err) {
+    console.err("delete> err: ");
+    console.log(err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -75,7 +92,7 @@ router.delete("/:id", getBlogPost, async (req, res) => {
 async function getBlogPost(req, res, next) {
   let blogPost;
   try {
-    blogPost = await BlogPost.findById(req.params.id);
+    blogPost = await BlogPost.findById(req.params.id).exec();
     if (blogPost == null) {
       return res.status(404).json({ message: "Cannot find blog post" });
     }

@@ -40,10 +40,10 @@ const handleLogin = async (req, res) => {
   try {
     // Retrieve the existing blog user from the middleware, if it exists.
     const existingBlogUser = res.blogUser;
-    console.log(
-      "authController.handleLogin> existingBlogUser: " +
-        JSON.stringify(existingBlogUser)
-    );
+    //    console.log(
+    //      "authController.handleLogin> existingBlogUser: " +
+    //        JSON.stringify(existingBlogUser)
+    //    );
     if (!existingBlogUser) {
       // Unable to locate the user for a login attempt
       return res
@@ -54,9 +54,9 @@ const handleLogin = async (req, res) => {
 
     // Check if passwords match
     const match = await bcrypt.compare(pwd, existingBlogUser.hashedPassword);
-    console.log(
-      "authController.handleLogin> pwd: " + pwd + ", match: " + match
-    );
+    //    console.log(
+    //      "authController.handleLogin> pwd: " + pwd + ", match: " + match
+    //    );
     if (match) {
       // hashed passwords match
 

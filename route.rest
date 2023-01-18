@@ -1,15 +1,15 @@
 GET http://localhost:4000/blogposts
 
 ###
-GET http://localhost:4000/blogposts/63c5f7d543ff91545ae62f4e
+GET http://localhost:4000/blogposts/63c60f8e9384f9377b431295
 
 ###
 POST http://localhost:4000/blogposts
 Content-Type: application/json
 
 {
-    "author": "Unknown",
-    "title": "Test Post Title 3",
+    "author": "danny",
+    "title": "Test Post Title 4",
     "content": "Test Post Content 3"
 }
 
