@@ -1,16 +1,20 @@
 const mongoose = require("mongoose");
 
-const blogPostSchema = new mongoose.Schema({
-  author: {
+const inventoryItemSchema = new mongoose.Schema({
+  owner: {
     type: String,
     required: true,
   },
-  title: {
+  itemname: {
     type: String,
     required: true,
   },
-  content: {
+  description: {
     type: String,
+    required: true,
+  },
+  quantity: {
+    type: Number,
     required: true,
   },
   modifieddate: {
@@ -20,4 +24,4 @@ const blogPostSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("BlogPost", blogPostSchema);
+module.exports = mongoose.model("InventoryItem", inventoryItemSchema);

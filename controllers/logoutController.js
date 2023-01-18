@@ -1,4 +1,4 @@
-const BlogUser = require("../models/BlogUserModel");
+const InventoryItemUser = require("../models/InventoryItemUserModel");
 
 /**
  * JSON Web Token Strategy:
@@ -33,12 +33,14 @@ const handleLogout = async (req, res) => {
   const refreshToken = cookies.jwt;
   //  console.log("handleLogout> refreshToken: " + refreshToken);
 
-  // Retrieve the existing blog user, if it exists.
-  const existingBlogUser = await BlogUser.findOne({ refreshToken }).exec();
+  // Retrieve the existing inventory item user, if it exists.
+  const existingInventoryItemUser = await InventoryItemUser.findOne({
+    refreshToken,
+  }).exec();
   //  console.log(
-  //    "handleLogout> existingBlogUser: " + JSON.stringify(existingBlogUser)
+  //    "handleLogout> existingInventoryItemUser: " + JSON.stringify(existingInventoryItemUser)
   //  );
-  if (!existingBlogUser) {
+  if (!existingInventoryItemUser) {
     // Unable to locate the user for a login attempt
     // Erase the cookie identified as "jwt"
     res.clearCookie("jwt", { httpOnly: true });
@@ -50,8 +52,9 @@ const handleLogout = async (req, res) => {
   // Post condition: User found
 
   // Delete refresh token from db
-  existingBlogUser.refreshToken = "";
-  const result = await existingBlogUser.save();
+  existingInventoryItemUser.refreshToken = "";
+  //const result =
+  await existingInventoryItemUser.save();
   //  console.log(
   //    "logoutController.handleLogout> Removed refresh token; result: " +
   //      JSON.stringify(result)
@@ -61,7 +64,7 @@ const handleLogout = async (req, res) => {
   res.clearCookie("jwt", { httpOnly: true });
   // Send back the user with token cleared
   // NOTE: Only for dev since this will send the hashed password also.
-  res.status(200).json({ existingBlogUser });
+  res.status(200).json({ existingInventoryItemUser });
 };
 
 module.exports = { handleLogout };

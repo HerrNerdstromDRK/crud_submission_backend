@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 
 /**
  * Authenticate a user.
- * The getBlogUserByUserName middleware is called prior to invoking this
+ * The getInventoryItemUserByUserName middleware is called prior to invoking this
  * function.
  *
  * JSON Web Token Strategy:
@@ -39,12 +39,12 @@ const handleLogin = async (req, res) => {
 
   try {
     // Retrieve the existing blog user from the middleware, if it exists.
-    const existingBlogUser = res.blogUser;
+    const existingInventoryItemUser = res.inventoryItemUser;
     //    console.log(
-    //      "authController.handleLogin> existingBlogUser: " +
-    //        JSON.stringify(existingBlogUser)
+    //      "authController.handleLogin> existingInventoryItemUser: " +
+    //        JSON.stringify(existingInventoryItemUser)
     //    );
-    if (!existingBlogUser) {
+    if (!existingInventoryItemUser) {
       // Unable to locate the user for a login attempt
       return res
         .status(401)
@@ -53,7 +53,10 @@ const handleLogin = async (req, res) => {
     // Post condition: User found
 
     // Check if passwords match
-    const match = await bcrypt.compare(pwd, existingBlogUser.hashedPassword);
+    const match = await bcrypt.compare(
+      pwd,
+      existingInventoryItemUser.hashedPassword
+    );
     //    console.log(
     //      "authController.handleLogin> pwd: " + pwd + ", match: " + match
     //    );
@@ -79,11 +82,12 @@ const handleLogin = async (req, res) => {
       );
 
       // Save refresh token with current user
-      existingBlogUser.refreshToken = refreshToken;
-      const updatedExistingBlogUser = await existingBlogUser.save();
+      existingInventoryItemUser.refreshToken = refreshToken;
+      const updatedExistingInventoryItemUser =
+        await existingInventoryItemUser.save();
       //      console.log(
-      //        "authController.handleLogin> updatedExistingBlogUser: " +
-      //          JSON.stringify(existingBlogUser)
+      //        "authController.handleLogin> updatedExistingInventoryItemUser: " +
+      //          JSON.stringify(updatedExistingInventoryItemUser)
       //      );
 
       // Send the refreshToken to the user

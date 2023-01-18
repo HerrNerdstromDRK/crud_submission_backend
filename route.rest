@@ -1,59 +1,63 @@
-GET http://localhost:4000/blogposts
+GET http://localhost:4000/inventoryitems
 
 ###
-GET http://localhost:4000/blogposts/63c60f8e9384f9377b431295
+GET http://localhost:4000/inventoryitems/63c86e0af3de1bc87f44fe7a
 
 ###
-POST http://localhost:4000/blogposts
+GET http://localhost:4000/inventoryitems/byusername/danny
+
+###
+POST http://localhost:4000/inventoryitems
 Content-Type: application/json
 
 {
-    "author": "danny",
-    "title": "Test Post Title 4",
-    "content": "Test Post Content 3"
+    "owner": "danny",
+    "itemname": "Test Item Name 4",
+    "description": "Test Item Description 3",
+    "quantity": 12345
 }
 
 ###
-DELETE http://localhost:4000/blogposts/63c32f2a00d8d46fa6eddb1f
+DELETE http://localhost:4000/inventoryitems/63c86e15f3de1bc87f44fe86
 
 ###
-PATCH http://localhost:4000/blogposts/63c32f4f00d8d46fa6eddb29
+PATCH http://localhost:4000/inventoryitems/63c86e0af3de1bc87f44fe7a
 Content-Type: application/json
 
 {
-    "title": "New Title 3 - 1"
+    "quantity": 54321
 }
 
 ###
-GET http://localhost:4000/blogusers
+GET http://localhost:4000/inventoryitemusers
 
 ###
-GET http://localhost:4000/blogusers/63c5a8eabd264d787a74d31c
+GET http://localhost:4000/inventoryitemusers/63c86e64f3de1bc87f44fea2
 
 ###
-POST http://localhost:4000/blogusers/register
+POST http://localhost:4000/inventoryitemusers/register
 Content-Type: application/json
 
 {
     "firstName": "Danss4",
     "lastName": "Karrels",
-    "userName": "danny23",
+    "userName": "danny223",
     "pwd": "Abc12345!!"
 }
 
 ###
-PATCH http://localhost:4000/blogusers/63c478d35af1b6419558aead
+PATCH http://localhost:4000/inventoryitemusers/63c86e64f3de1bc87f44fea2
 Content-Type: application/json
 
 {
-    "hashedPassword": "Abc12345678!!"
+    "firstName": "Luke"
 }
 
 ###
-DELETE http://localhost:4000/blogusers/63c5e425909bffd8daf5d771
+DELETE http://localhost:4000/inventoryitemusers/63c86e64f3de1bc87f44fea2
 
 ###
-POST http://localhost:4000/blogusers/authenticate
+POST http://localhost:4000/inventoryitemusers/authenticate
 Content-Type: application/json
 
 {
@@ -62,7 +66,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:4000/blogusers/refresh
+GET http://localhost:4000/inventoryitemusers/refresh
 
 ###
-GET http://localhost:4000/blogusers/logout
+GET http://localhost:4000/inventoryitemusers/logout

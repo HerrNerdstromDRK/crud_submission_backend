@@ -40,12 +40,12 @@ app.use(cookieParser());
 //app.use(express.urlencoded({ extended: false }));
 
 // Setup routes
-const blogPostsRouter = require("./routes/blogposts");
-const blogUsersRouter = require("./routes/blogusers");
+const inventoryItemsRouter = require("./routes/inventoryitems");
+const inventoryItemUsersRouter = require("./routes/inventoryitemusers");
 
 // Link the router to the database tables
-app.use("/blogposts", blogPostsRouter);
-app.use("/blogusers", blogUsersRouter);
+app.use("/inventoryitems", inventoryItemsRouter);
+app.use("/inventoryitemusers", inventoryItemUsersRouter);
 
 // Be sure to place verifyJWT after the initial routes
 //app.use(verifyJWT);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const blogUserSchema = new mongoose.Schema({
+const inventoryItemUserSchema = new mongoose.Schema({
   // _id is pre-defined by mongoDB
   firstName: {
     type: String,
@@ -24,4 +24,4 @@ const blogUserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("BlogUser", blogUserSchema);
+module.exports = mongoose.model("InventoryItemUser", inventoryItemUserSchema);

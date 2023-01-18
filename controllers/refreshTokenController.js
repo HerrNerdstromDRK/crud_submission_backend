@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-const BlogUser = require("../models/BlogUserModel");
+const BlogUser = require("../models/InventoryItemUserModel");
 
 /**
  * JSON Web Token Strategy:
@@ -37,12 +37,14 @@ const handleRefreshToken = async (req, res) => {
   );
 
   // Retrieve the existing blog user, if it exists.
-  const existingBlogUser = await BlogUser.findOne({ refreshToken }).exec();
-  console.log(
-    "refreshTokenController.handleRefreshToken> existingBlogUser: " +
-      JSON.stringify(existingBlogUser)
-  );
-  if (!existingBlogUser) {
+  const existingInventoryItemUser = await InventoryItemUser.findOne({
+    refreshToken,
+  }).exec();
+  //  console.log(
+  //    "refreshTokenController.handleRefreshToken> existingInventoryItemUser: " +
+  //      JSON.stringify(existingInventoryItemUser)
+  //  );
+  if (!existingInventoryItemUser) {
     // Unable to locate the user for a login attempt
     console.log(
       "refreshTokenController.handleRefreshToken> Unable to find user by refresh token: " +
@@ -56,7 +58,7 @@ const handleRefreshToken = async (req, res) => {
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
     // Callback for verify
     // Check for any error or if the wrong user was returned
-    if (err || existingBlogUser.userName !== decoded.userName) {
+    if (err || existingInventoryItemUser.userName !== decoded.userName) {
       return res.sendStatus(403);
     }
     const accessToken = jwt.sign(

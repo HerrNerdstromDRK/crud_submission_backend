@@ -1,13 +1,13 @@
 /**
- * Handle all routes that begin with /blogusers
+ * Handle all routes that begin with /inventoryitemuser
  */
 const express = require("express");
 const router = express.Router();
-const BlogUser = require("../models/BlogUserModel");
+const inventoryItemUser = require("../models/InventoryItemUserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const getBlogUser = require("../middleware/getBlogUser");
-const getBlogUserByUserName = require("../middleware/getBlogUserByUserName");
+const getInventoryItemUser = require("../middleware/getInventoryItemUser");
+const getInventoryItemUserByUserName = require("../middleware/getInventoryItemUserByUserName");
 const authController = require("../controllers/authController");
 const registerController = require("../controllers/registerController");
 const refreshTokenController = require("../controllers/refreshTokenController");
@@ -15,11 +15,13 @@ const handleLogoutController = require("../controllers/logoutController");
 
 require("dotenv").config();
 
-// Get all
+/**
+ * Get all users.
+ */
 router.get("/", async (req, res) => {
   try {
-    const blogUsers = await BlogUser.find();
-    res.json(blogUsers);
+    const inventoryItemUsers = await inventoryItemUser.find();
+    res.json(inventoryItemUsers);
   } catch (err) {
     // 500 is server error code
     res.status(500).json({ message: err.message });
@@ -39,60 +41,68 @@ router.get("/refresh", refreshTokenController.handleRefreshToken);
 router.get("/logout", handleLogoutController.handleLogout);
 
 /**
- * Retrieve a single blogUser by id.
- * // Use the getBlogUser middleware
+ * Retrieve a single inventoryItemUser by id.
+ * Uses the getInventoryItemUser middleware.
  */
-router.get("/:id", getBlogUser, (req, res) => {
-  res.send(res.blogUser);
+router.get("/:id", getInventoryItemUser, (req, res) => {
+  res.send(res.inventoryItemUser);
 });
 
 /*
  * Create a new user and add it to the database.
  * Will verify that no duplicate userName exists first by calling
- * the getBlogUserByUserName middleware.
+ * the getInventoryItemUserByUserName middleware.
  * If a duplicate userName exists, this function will return
  * an error to the caller.
  */
 router.post(
   "/register",
-  getBlogUserByUserName,
+  getInventoryItemUserByUserName,
   registerController.handleRegister
 );
 
 /**
  * Since the authenticate route code will be used several times, use it
  * from a separate authController. Note that this call still includes a
- * middleware call to getBlogUserByUserName.
+ * middleware call to getInventoryItemUserByUserName.
  */
-router.post("/authenticate", getBlogUserByUserName, authController.handleLogin);
+router.post(
+  "/authenticate",
+  getInventoryItemUserByUserName,
+  authController.handleLogin
+);
 
-// Update only updated data
-router.patch("/:id", getBlogUser, async (req, res) => {
+/**
+ * Update a user's information, but only the items that have changed.
+ */
+router.patch("/:id", getInventoryItemUser, async (req, res) => {
   if (req.body.firstName != null) {
-    res.blogUser.firstName = req.body.firstName;
+    res.inventoryItemUser.firstName = req.body.firstName;
   }
   if (req.body.lastName != null) {
-    res.blogUser.lastName = req.body.lastName;
+    res.inventoryItemUser.lastName = req.body.lastName;
   }
   if (req.body.userName != null) {
-    res.blogUser.userName = req.body.userName;
+    res.inventoryItemUser.userName = req.body.userName;
   }
   if (req.body.hashedPassword != null) {
-    res.blogUser.hashedPassword = req.body.hashedPassword;
+    res.inventoryItemUser.hashedPassword = req.body.hashedPassword;
   }
   try {
-    const updatedBlogUser = await res.blogUser.save();
-    res.json(updatedBlogUser);
+    const updatedinventoryItemUser = await res.inventoryItemUser.save();
+    res.json(updatedinventoryItemUser);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// Delete one
-router.delete("/:id", getBlogUser, async (req, res) => {
+/**
+ * Delete a user.
+ */
+router.delete("/:id", getInventoryItemUser, async (req, res) => {
   try {
-    await res.blogUser.remove();
-    res.json({ message: "Deleted blog user" });
+    await res.inventoryItemUser.remove();
+    res.json({ message: "Deleted inventory item user" });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
