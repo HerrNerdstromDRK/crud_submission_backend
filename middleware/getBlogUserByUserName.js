@@ -13,7 +13,7 @@ const getBlogUserByUserName = async (req, res, next) => {
   let blogUser = null;
   try {
     blogUser = await BlogUser.findOne({ userName: req.body.userName }).exec();
-    console.log("getBlogUserByUserName> blogUser: " + blogUser);
+    //    console.log("getBlogUserByUserName> blogUser: " + blogUser);
     // Do NOT set a status here since I still need to execute the
     // code in the body of the next() function
   } catch (err) {

@@ -8,6 +8,7 @@ const BlogPost = require("../models/BlogPostModel");
 
 // Get all
 router.get("/", async (req, res) => {
+  //  console.log("get(/)> req.body: " + req.body);
   //  console.log(req);
   try {
     const blogPosts = await BlogPost.find();
@@ -18,11 +19,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/itemsbyuser/:userName", async (req, res) => {
-  const whichUserName = req.params.userName;
-  console.log("get(myitems)> ");
+router.get("/byusername/:userName", async (req, res) => {
+  const userName = req.params.userName;
+  //  console.log("get(/byusername/:userName)> userName: " + userName);
   try {
-    const blogPosts = await BlogPost.find();
+    const blogPosts = await BlogPost.find({ author: userName });
     res.json(blogPosts);
   } catch (err) {
     // 500 is server error code
@@ -80,7 +81,9 @@ router.patch("/:id", getBlogPost, async (req, res) => {
 router.delete("/:id", getBlogPost, async (req, res) => {
   //  console.log("delete> req.params.id: " + req.params.id);
   try {
+    const userName = res.blogPost.author;
     await res.blogPost.delete();
+    res.userName = userName;
     res.status(200).json({ message: "Deleted blog post" });
   } catch (err) {
     console.err("delete> err: ");

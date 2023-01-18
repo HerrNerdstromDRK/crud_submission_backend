@@ -33,9 +33,9 @@ const handleLogin = async (req, res) => {
     return res
       .status(400)
       .json({ message: "Username and password are required." });
-  console.log(
-    "authController.handleLogin> userName: " + userName + ", pwd: " + pwd
-  );
+  //  console.log(
+  //    "authController.handleLogin> userName: " + userName + ", pwd: " + pwd
+  //  );
 
   try {
     // Retrieve the existing blog user from the middleware, if it exists.
