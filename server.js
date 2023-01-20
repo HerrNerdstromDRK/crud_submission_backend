@@ -13,7 +13,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 8080;
 
 // strictQuery has to do with a deprecation issue as mongoose upgrades versions
 mongoose.set("strictQuery", false);
@@ -32,7 +32,7 @@ db.once("open", () =>
 app.use(express.json());
 
 // Enable cross-origin routing
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
 // Middleware for cookie management
 app.use(cookieParser());
