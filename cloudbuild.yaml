@@ -1,0 +1,5 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/crudsubmissionbackend-375301/github.com/herrnerdstromdrk/crud_submission_backend:$SHORT_SHA', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/crudsubmissionbackend-375301/github.com/herrnerdstromdrk/crud_submission_backend:$SHORT_SHA']
