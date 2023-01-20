@@ -35,7 +35,7 @@ db.once("open", () =>
 app.use(express.json());
 
 // Enable cross-origin routing
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Middleware for cookie management
 app.use(cookieParser());

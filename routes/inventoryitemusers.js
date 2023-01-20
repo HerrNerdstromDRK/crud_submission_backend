@@ -19,6 +19,7 @@ require("dotenv").config();
  * Get all users.
  */
 router.get("/", async (req, res) => {
+  console.log("inventoryitemusers.get(/)");
   try {
     const inventoryItemUsers = await inventoryItemUser.find();
     res.json(inventoryItemUsers);
@@ -34,17 +35,24 @@ router.get("/", async (req, res) => {
  * any get routes with :id.
  */
 router.get("/refresh", refreshTokenController.handleRefreshToken);
+{
+  console.log("inventoryitemusers.get(/refresh)");
+}
 
 /**
  * Add a route to logout the user, which basically just clears the refresh token.
  */
 router.get("/logout", handleLogoutController.handleLogout);
+{
+  console.log("inventoryitemusers.get(/logout)");
+}
 
 /**
  * Retrieve a single inventoryItemUser by id.
  * Uses the getInventoryItemUser middleware.
  */
 router.get("/:id", getInventoryItemUser, (req, res) => {
+  console.log("inventoryitemusers.get(/:id)");
   res.send(res.inventoryItemUser);
 });
 
@@ -60,6 +68,9 @@ router.post(
   getInventoryItemUserByUserName,
   registerController.handleRegister
 );
+{
+  console.log("inventoryitemusers.post(/register)");
+}
 
 /**
  * Since the authenticate route code will be used several times, use it
@@ -71,11 +82,15 @@ router.post(
   getInventoryItemUserByUserName,
   authController.handleLogin
 );
+{
+  console.log("inventoryitemusers.post(/authenticate)");
+}
 
 /**
  * Update a user's information, but only the items that have changed.
  */
 router.patch("/:id", getInventoryItemUser, async (req, res) => {
+  console.log("inventoryitemusers.patch(/:id)");
   if (req.body.firstName != null) {
     res.inventoryItemUser.firstName = req.body.firstName;
   }
@@ -100,6 +115,7 @@ router.patch("/:id", getInventoryItemUser, async (req, res) => {
  * Delete a user.
  */
 router.delete("/:id", getInventoryItemUser, async (req, res) => {
+  console.log("inventoryitemusers.delete(/:id)");
   try {
     await res.inventoryItemUser.remove();
     res.json({ message: "Deleted inventory item user" });

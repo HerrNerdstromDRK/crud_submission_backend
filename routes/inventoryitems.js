@@ -9,7 +9,7 @@ const InventoryItem = require("../models/InventoryItemModel");
  * Get all inventory items.
  */
 router.get("/", async (req, res) => {
-  //  console.log("get(/)> req.body: " + req.body);
+  console.log("get(/)> req.body: " + req.body);
   //  console.log(req);
   try {
     const inventoryItems = await InventoryItem.find();
@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
  */
 router.get("/byusername/:userName", async (req, res) => {
   const userName = req.params.userName;
-  //  console.log("get(/byusername/:userName)> userName: " + userName);
+  console.log("get(/byusername/:userName)> userName: " + userName);
   try {
     const inventoryItems = await InventoryItem.find({ owner: userName });
     res.json(inventoryItems);
@@ -39,7 +39,7 @@ router.get("/byusername/:userName", async (req, res) => {
  * Retrieve a single inventory item.
  */
 router.get("/:id", getInventoryItem, (req, res) => {
-  //  console.log("get(/inventoryitems/:id)");
+  console.log("get(/inventoryitems/:id)");
   res.send(res.inventoryItem);
 });
 
@@ -47,7 +47,7 @@ router.get("/:id", getInventoryItem, (req, res) => {
  * Create a new inventory item
  */
 router.post("/", async (req, res) => {
-  //  console.log("post(/)");
+  console.log("post(/)");
   const inventoryItem = new InventoryItem({
     owner: req.body.owner,
     itemname: req.body.itemname,
@@ -70,9 +70,9 @@ router.post("/", async (req, res) => {
  * Update any fields of the inventory item that have changed.
  */
 router.patch("/:id", getInventoryItem, async (req, res) => {
-  //  console.log(
-  //   "updatePost> original inventoryItem: " + JSON.stringify(res.inventoryItem)
-  // );
+  console.log(
+    "updatePost> original inventoryItem: " + JSON.stringify(res.inventoryItem)
+  );
   if (req.body.author != null) {
     res.inventoryItem.author = req.body.author;
   }
@@ -104,7 +104,7 @@ router.patch("/:id", getInventoryItem, async (req, res) => {
  * Delete a single inventory item by id.
  */
 router.delete("/:id", getInventoryItem, async (req, res) => {
-  //  console.log("delete> req.params.id: " + req.params.id);
+  console.log("delete> req.params.id: " + req.params.id);
   try {
     const userName = res.inventoryItem.author;
     await res.inventoryItem.delete();
@@ -125,7 +125,7 @@ router.delete("/:id", getInventoryItem, async (req, res) => {
  * @returns
  */
 async function getInventoryItem(req, res, next) {
-  //  console.log("getInventoryItem()");
+  console.log("getInventoryItem()");
   let inventoryItem;
   try {
     inventoryItem = await InventoryItem.findById(req.params.id).exec();
