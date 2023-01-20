@@ -19,6 +19,7 @@ const PORT = 8888;
 
 // strictQuery has to do with a deprecation issue as mongoose upgrades versions
 mongoose.set("strictQuery", false);
+console.log("server> Connecting to database: " + process.env.DATABASE_URL);
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true });
 
 // Access the database handle and install a couple callbacks
