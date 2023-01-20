@@ -2,7 +2,7 @@ const InventoryItemUser = require("../models/InventoryItemUserModel");
 
 /**
  * Search for a user by the given username in req.body.userName.
- * If found, store the user in res.blogUser.
+ * If found, store the user in res.inventoryItemUser.
  * If not found, set status 404.
  * @param {}
  * @returns

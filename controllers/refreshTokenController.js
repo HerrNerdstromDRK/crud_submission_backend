@@ -36,7 +36,7 @@ const handleRefreshToken = async (req, res) => {
     "refreshTokenController.handleRefreshToken> refreshToken: " + refreshToken
   );
 
-  // Retrieve the existing blog user, if it exists.
+  // Retrieve the existing inventory user, if it exists.
   const existingInventoryItemUser = await InventoryItemUser.findOne({
     refreshToken,
   }).exec();

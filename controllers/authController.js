@@ -38,7 +38,7 @@ const handleLogin = async (req, res) => {
   //  );
 
   try {
-    // Retrieve the existing blog user from the middleware, if it exists.
+    // Retrieve the existing inventory user from the middleware, if it exists.
     const existingInventoryItemUser = res.inventoryItemUser;
     //    console.log(
     //      "authController.handleLogin> existingInventoryItemUser: " +

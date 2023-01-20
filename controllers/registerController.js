@@ -17,7 +17,7 @@ const handleRegister = async (req, res) => {
     "registerController.handleRegister> userName: " + userName + ", pwd: " + pwd
   );
   try {
-    // Retrieve the existing blog user from the middleware, if it exists.
+    // Retrieve the existing inventory user from the middleware, if it exists.
     const existingInventoryItemUser = res.InventoryItemUser;
     if (existingInventoryItemUser) {
       console.log(

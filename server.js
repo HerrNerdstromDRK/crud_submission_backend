@@ -24,7 +24,9 @@ const db = mongoose.connection;
 db.on("error", (error) =>
   console.error("server.onerror> error: " + JSON.stringify(error))
 );
-db.once("open", () => console.log("Connected to database"));
+db.once("open", () =>
+  console.log("Connected to database: " + process.env.DATABASE_URL)
+);
 
 // Configure server to accept JSON
 app.use(express.json());
