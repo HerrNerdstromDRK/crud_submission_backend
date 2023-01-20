@@ -13,7 +13,9 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const corsOptions = require("./config/corsOptions");
 const cookieParser = require("cookie-parser");
-const PORT = process.env.PORT || 8888;
+
+// Server port on which to listen for new connections
+const PORT = 8888;
 
 // strictQuery has to do with a deprecation issue as mongoose upgrades versions
 mongoose.set("strictQuery", false);
