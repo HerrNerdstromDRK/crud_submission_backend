@@ -1,4 +1,4 @@
-GET inventory.t43ck.mongodb.net/test/inventoryitems
+GET http://localhost:4000/inventoryitems/test/inventoryitems
 
 ###
 GET http://localhost:4000/inventoryitems/63c86e0af3de1bc87f44fe7a
